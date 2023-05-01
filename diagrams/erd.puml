@@ -1,0 +1,43 @@
+@startuml BrainByte
+
+!pragma ratio 0.8
+
+left to right direction
+hide circles
+
+entity Quiz {
+    * id : <<uuid>>
+    ---
+    * name : string
+      description : string
+    * creator : <<FK>>
+    * public : bool
+}
+
+entity Question {
+    * id : <<uuid>>
+    ---
+    * quizId : <<FK>>
+    * index : int
+    * type : string
+    * jsonData : string
+}
+
+entity User {
+    * id : <<uuid>>
+    ---
+    * username : string
+    * email : string
+    
+}
+
+entity QuizAttendee {
+    * id : <<uuid>>
+    ---
+    * username: string
+    * quizId : <<FK>>
+    score : int
+    userId : <<FK>>
+}
+
+@enduml
