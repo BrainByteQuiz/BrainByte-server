@@ -1,0 +1,37 @@
+model Quiz {
+  id          String         @id @default(uuid())
+  name        String
+  description String
+  creator     User           @relation(fields: [creatorId], references: [id])
+  creatorId   String
+  public      Boolean
+  questions   Question[]
+  attendees   QuizAttendee[]
+}
+
+model Question {
+  id       String @id @default(uuid())
+  quizId   String
+  index    Int
+  type     String
+  jsonData String
+  quiz     Quiz   @relation(fields: [quizId], references: [id])
+}
+
+model User {
+  id              String         @id @default(uuid())
+  username        String
+  email           String
+  createdQuizzes  Quiz[]
+  attendedQuizzes QuizAttendee[]
+}
+
+model QuizAttendee {
+  id       String @id @default(uuid())
+  username String
+  score    Int
+  quizId   String
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  quiz     Quiz   @relation(fields: [quizId], references: [id])
+}
