@@ -28,6 +28,8 @@ entity User {
     ---
     * username : string
     * email : string
+    * hashedPassword : string
+    * salt : string
     picturePath : string
 }
 

@@ -23,6 +23,8 @@ model User {
   username        String
   email           String
   picturePath     String
+  hashedPassword  String
+  salt            String
   createdQuizzes  Quiz[]
   attendedQuizzes QuizAttendee[]
 }
