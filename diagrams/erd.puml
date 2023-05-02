@@ -28,7 +28,7 @@ entity User {
     ---
     * username : string
     * email : string
-    
+    picturePath : string
 }
 
 entity QuizAttendee {
