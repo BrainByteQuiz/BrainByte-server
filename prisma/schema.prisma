@@ -16,16 +16,18 @@ model Quiz {
   creatorId   String
   public      Boolean
   picturePath String?
+  deletedAt   DateTime?
   questions   Question[]
   attendees   QuizAttendee[]
 }
 
 model Question {
-  id       String @id @default(uuid())
-  quizId   String
-  index    Int
-  type     String
-  jsonData String
+  id          String @id @default(uuid())
+  quizId      String
+  index       Int
+  type        String
+  jsonData    String
+  deletedAt   DateTime?
   quiz     Quiz   @relation(fields: [quizId], references: [id])
 }
 
@@ -36,6 +38,7 @@ model User {
   picturePath     String?
   hashedPassword  String
   salt            String
+  deletedAt       DateTime?
   createdQuizzes  Quiz[]
   attendedQuizzes QuizAttendee[]
 }
