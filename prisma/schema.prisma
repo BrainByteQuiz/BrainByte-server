@@ -22,13 +22,13 @@ model Quiz {
 }
 
 model Question {
-  id          String @id @default(uuid())
+  id          String      @id @default(uuid())
   quizId      String
   index       Int
   type        String
   jsonData    String
   deletedAt   DateTime?
-  quiz     Quiz   @relation(fields: [quizId], references: [id])
+  quiz        Quiz        @relation(fields: [quizId], references: [id])
 }
 
 model User {
