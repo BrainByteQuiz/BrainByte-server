@@ -18,17 +18,27 @@ model Quiz {
   picturePath String?
   deletedAt   DateTime?
   questions   Question[]
-  attendees   QuizAttendee[]
 }
 
 model Question {
-  id          String      @id @default(uuid())
-  quizId      String
-  index       Int
-  type        String
-  jsonData    String
-  deletedAt   DateTime?
-  quiz        Quiz        @relation(fields: [quizId], references: [id])
+  id              String      @id @default(uuid())
+  quizId          String
+  quiz            Quiz        @relation(fields: [quizId], references: [id])
+  question        String
+  time            Int
+  multipleChoice  Boolean
+  image           String?
+  codeSnippet     String?
+  snippetLanguage DateTime?
+  answers         Answer[]
+}
+
+model Answer {
+  id            String      @id @default(uuid())
+  text          String
+  isCorrect     Boolean
+  questionId    String
+  question      Question    @relation(fields: [questionId], references: [id])
 }
 
 model User {
@@ -40,15 +50,4 @@ model User {
   salt            String
   deletedAt       DateTime?
   createdQuizzes  Quiz[]
-  attendedQuizzes QuizAttendee[]
-}
-
-model QuizAttendee {
-  id       String  @id @default(uuid())
-  username String
-  score    Int
-  quizId   String
-  userId   String?
-  user     User?   @relation(fields: [userId], references: [id])
-  quiz     Quiz    @relation(fields: [quizId], references: [id])
 }
