@@ -22,21 +22,23 @@ model Question {
   id              String      @id @default(uuid())
   quizId          String
   quiz            Quiz        @relation(fields: [quizId], references: [id])
-  question        String
+  text            String
   time            Int
   multipleChoice  Boolean
   image           String?
   codeSnippet     String?
-  snippetLanguage DateTime?
+  snippetLanguage String?
+  deletedAt       DateTime?
   answers         Answer[]
 }
 
 model Answer {
   id            String      @id @default(uuid())
-  text          String
-  isCorrect     Boolean
   questionId    String
   question      Question    @relation(fields: [questionId], references: [id])
+  text          String
+  isCorrect     Boolean
+  deletedAt     DateTime?
 }
 
 model User {
