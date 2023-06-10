@@ -1,16 +1,23 @@
 import { Result } from "@badrap/result";
-import type { Quiz, Question, User } from '@prisma/client';
+import type { Quiz, Question, User, Answer } from '@prisma/client';
 
-export type QuizCreateResult = Promise<Result<Quiz>>;
+export type GenericQuestionResult = Question & {
+    answers: Answer[],
+};
 
-export type QuizDeleteResult = Promise<Result<Quiz & {
-    questions: Question[];
-}>>;
+export type GenericQuizResult = Quiz & {
+    questions: GenericQuestionResult[],
+};
 
-export type QuizReadResult = Promise<Result<Quiz>>;
+
+export type QuizCreateResult = Promise<Result<GenericQuizResult>>;
+
+export type QuizDeleteResult = Promise<Result<GenericQuizResult>>;
+
+export type QuizReadResult = Promise<Result<GenericQuizResult>>;
 
 export type QuizReadUserResult = Promise<Result<User & {
-    createdQuizzes: Quiz[];
+    createdQuizzes: GenericQuizResult[];
 }>>;
 
-export type QuizUpdateResult = Promise<Result<Quiz>>;
+export type QuizUpdateResult = Promise<Result<GenericQuizResult>>;
