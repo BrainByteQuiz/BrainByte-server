@@ -23,8 +23,6 @@ const update = async (data: QuizUpdateData): QuizUpdateResult => {
           data: {
             name: data.name,
             description: data.description,
-            public: data.public,
-            picturePath: data.picturePath,
           }
         });
 

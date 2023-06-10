@@ -25,6 +25,4 @@ export type QuizUpdateData = {
     creatorId: string;
     name: string | undefined;
     description: string | undefined;
-    public: boolean | undefined;
-    picturePath: string | undefined;
 };
