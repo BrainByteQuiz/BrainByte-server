@@ -1,5 +1,3 @@
-import type { Question } from "@prisma/client";
-
 export type QuizCreateData = {
     name: string;
     description: string | undefined;
@@ -20,7 +18,6 @@ export type QuizReadData = {
 
 export type QuizReadUserData = {
     creatorId: string;
-    //order: Prisma.SortOrder;
 };
 
 export type QuizUpdateData = {
@@ -28,6 +25,6 @@ export type QuizUpdateData = {
     creatorId: string;
     name: string | undefined;
     description: string | undefined;
-    public: Boolean | undefined;
-    picturePath: String | undefined;
+    public: boolean | undefined;
+    picturePath: string | undefined;
 };

@@ -10,7 +10,7 @@ export type QuizDeleteResult = Promise<Result<Quiz & {
 export type QuizReadResult = Promise<Result<Quiz>>;
 
 export type QuizReadUserResult = Promise<Result<User & {
-    quizzes: Quiz[];
+    createdQuizzes: Quiz[];
 }>>;
 
 export type QuizUpdateResult = Promise<Result<Quiz>>;

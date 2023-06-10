@@ -7,7 +7,9 @@ const create = async (data: QuizCreateData): QuizCreateResult => {
   try {
     return Result.ok(
       await client.quiz.create({
-        ...data,
+        data: {
+          ...data
+        },
       }),
     );
   } catch (e) {
