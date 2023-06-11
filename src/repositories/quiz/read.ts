@@ -13,8 +13,8 @@ const specific = async (data: QuizReadData): QuizReadResult => {
           },
         });
 
-        if (!quiz.public && quiz.creatorId !== data.creatorId) {
-          throw new Error("The user is not the owner of this private quiz");
+        if (quiz.creatorId !== data.creatorId) {
+          throw new Error("The user is not the owner of this quiz");
         }
 
         return quiz;

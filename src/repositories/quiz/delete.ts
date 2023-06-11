@@ -41,16 +41,6 @@ const deleteQuiz = async (data: QuizDeleteData): QuizDeleteResult => {
               },
             },
           },
-          include: {
-            questions: {
-              where: {
-                deletedAt,
-              },
-              orderBy: {
-                index: 'asc',
-              },
-            },
-          },
         });
 
         return updated;

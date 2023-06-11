@@ -21,9 +21,8 @@ const update = async (data: QuizUpdateData): QuizUpdateResult => {
             id: data.id,
           },
           data: {
-            name: data.name,
-            description: data.description,
-          }
+            ...data.data,
+          },
         });
 
         return result;

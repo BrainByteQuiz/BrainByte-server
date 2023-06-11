@@ -14,31 +14,8 @@ model Quiz {
   description String?
   creator     User           @relation(fields: [creatorId], references: [id])
   creatorId   String
+  questions   String?
   deletedAt   DateTime?
-  questions   Question[]
-}
-
-model Question {
-  id              String      @id @default(uuid())
-  quizId          String
-  quiz            Quiz        @relation(fields: [quizId], references: [id])
-  text            String
-  time            Int
-  multipleChoice  Boolean
-  image           String?
-  codeSnippet     String?
-  snippetLanguage String?
-  deletedAt       DateTime?
-  answers         Answer[]
-}
-
-model Answer {
-  id            String      @id @default(uuid())
-  questionId    String
-  question      Question    @relation(fields: [questionId], references: [id])
-  text          String
-  isCorrect     Boolean
-  deletedAt     DateTime?
 }
 
 model User {
