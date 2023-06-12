@@ -30,16 +30,6 @@ const deleteQuiz = async (data: QuizDeleteData): QuizDeleteResult => {
           },
           data: {
             deletedAt,
-            questions: {
-              updateMany: {
-                where: {
-                  deletedAt: null,
-                },
-                data: {
-                  deletedAt,
-                },
-              },
-            },
           },
         });
 
@@ -49,4 +39,4 @@ const deleteQuiz = async (data: QuizDeleteData): QuizDeleteResult => {
   } catch (e) {
     return Result.err(e as Error);
   }
-}
+};
