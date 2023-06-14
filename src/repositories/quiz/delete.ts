@@ -40,3 +40,5 @@ const deleteQuiz = async (data: QuizDeleteData): QuizDeleteResult => {
     return Result.err(e as Error);
   }
 };
+
+export default deleteQuiz;

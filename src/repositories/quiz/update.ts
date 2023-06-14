@@ -31,3 +31,5 @@ const update = async (data: QuizUpdateData): QuizUpdateResult => {
     return Result.err(e as Error);
   }
 };
+
+export default update;
