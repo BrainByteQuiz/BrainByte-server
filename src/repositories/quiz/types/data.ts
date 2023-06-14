@@ -12,7 +12,7 @@ export type QuizDeleteData = {
 
 export type QuizReadData = {
     id: string;
-    creatorId?: string | undefined;
+    creatorId: string;
 };
 
 export type QuizReadUserData = {
