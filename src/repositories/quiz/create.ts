@@ -16,3 +16,5 @@ const create = async (data: QuizCreateData): QuizCreateResult => {
     return Result.err(e as Error);
   }
 };
+
+export default create;

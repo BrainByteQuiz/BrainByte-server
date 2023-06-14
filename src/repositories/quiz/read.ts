@@ -41,3 +41,5 @@ const allOfUser = async (data: QuizReadUserData): QuizReadUserResult => {
     return Result.err(e as Error);
   }
 };
+
+export default specific; allOfUser;
