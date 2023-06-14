@@ -52,7 +52,7 @@ app.use((_req, res) => {
 if (env.NODE_ENV !== 'test') {
   app.listen(port, () => {
     console.log(
-      `[${new Date().toISOString()}] RESTful API for iteration 06 is listening on port ${port}`,
+      `[${new Date().toISOString()}] RESTful API listening on port ${port}`,
     );
   });
 }
