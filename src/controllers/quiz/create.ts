@@ -1,18 +1,26 @@
 import create from "../../repositories/quiz/create";
 import type { Request, Response } from "express";
 import { errorResponse } from "../common";
+import { z } from "zod";
+
+const quizSchema = z.object({
+    name: z.string().min(2).max(128),
+    description: z.string().min(0).max(1024).optional(),
+    creatorId: z.string().uuid(),
+    questions: z.string().optional(),
+});
 
 const createQuizControl = async (req: Request, res: Response) => {
     if (!req.params["name"] || !req.params["creatorId"]) {
         return res.status(400).send(errorResponse("Required fields are missing"));
     }
 
-    const result = await create({
-        name: req.params['name'],
-        description: req.params['description'],
-        creatorId: req.params['creatorId'],
-        questions: req.params['questions'],
-    });
+    const validated = await quizSchema.safeParseAsync(req.params);
+    if (!validated.success) {
+        return res.status(400).send(errorResponse(validated.error.message));
+    }
+
+    const result = await create(validated.data);
     if (result.isErr) {
         return res.status(404).send(errorResponse(result.error.message));
     }
