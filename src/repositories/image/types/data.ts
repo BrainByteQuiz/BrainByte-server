@@ -1,5 +1,3 @@
-type PLACEHOLDER = undefined;
-
 export type ImageCreateData = {
     url: string;
 };
