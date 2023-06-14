@@ -1,8 +1,7 @@
 import { specific, allOfUser } from "../../repositories/quiz/read";
 import type { Request, Response } from "express";
 import { errorResponse } from "../common";
-import { ZodObject, ZodSchema, z } from "zod";
-import { QuizReadResult, QuizReadUserResult } from "../../repositories/quiz/types/result";
+import { z } from "zod";
 
 const readSingleSchema = z.object({
     id: z.string().uuid(),

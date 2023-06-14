@@ -1,7 +1,7 @@
 import deleteQuiz from "../../repositories/quiz/delete";
 import type { Request, Response } from "express";
 import { errorResponse } from "../common";
-import z from "zod";
+import { z } from "zod";
 
 const deleteSchema = z.object({
     id: z.string().uuid(),
