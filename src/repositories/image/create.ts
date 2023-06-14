@@ -6,7 +6,7 @@ import client from "../client";
 const create = async (data: ImageCreateData): ImageCreateResult => {
   try {
     return Result.ok(await client.$transaction(async (tx) => {
-      const URI = "/tmp"; // TODO: Store the actual image somewhere
+      const URI = data.url;
 
       const image = await tx.image.create({
         data: {
@@ -19,3 +19,5 @@ const create = async (data: ImageCreateData): ImageCreateResult => {
     return Result.err(e as Error);
   }
 };
+
+export default create;

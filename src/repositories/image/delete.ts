@@ -2,6 +2,7 @@ import { Result } from "@badrap/result";
 import client from "../client";
 import { ImageDeleteData } from "./types/data"
 import { ImageDeleteResult } from "./types/result"
+import fs from "fs";
 
 const deleteImage = async (data: ImageDeleteData): ImageDeleteResult => {
   try {
@@ -16,7 +17,18 @@ const deleteImage = async (data: ImageDeleteData): ImageDeleteResult => {
         throw new Error("The image has already been deleted");
       }
 
-      // TODO: Delete the actual image
+      const filePath = image.URI.replace("http://localhost:3000/uploads", "uploads");
+
+      if (fs.existsSync(filePath)) {
+
+        fs.unlink(filePath, error => {
+          if (error) {
+            throw new Error("Failed to delete file");
+          }
+        });
+      } else {
+        throw new Error("File not found");
+      }
 
       const deletedAt = new Date();
       const updated = await tx.image.update({
@@ -34,3 +46,5 @@ const deleteImage = async (data: ImageDeleteData): ImageDeleteResult => {
     return Result.err(e as Error);
   }
 };
+
+export default deleteImage;

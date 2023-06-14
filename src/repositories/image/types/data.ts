@@ -1,7 +1,7 @@
 type PLACEHOLDER = undefined;
 
 export type ImageCreateData = {
-    data: PLACEHOLDER;
+    url: string;
 };
 
 export type ImageDeleteData = {

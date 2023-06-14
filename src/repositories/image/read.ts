@@ -22,3 +22,5 @@ const read = async (data: ImageReadData): ImageReadResult => {
     return Result.err(e as Error);
   }
 };
+
+export default read;
