@@ -1,5 +1,5 @@
 import { Result } from "@badrap/result";
-import client from '../client';
+import client from "../client";
 import type { QuizCreateData } from "./types/data";
 import type { QuizCreateResult } from "./types/result";
 

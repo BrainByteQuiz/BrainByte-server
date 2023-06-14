@@ -1,5 +1,5 @@
 import { Result } from "@badrap/result";
-import type { Quiz, User } from '@prisma/client';
+import type { Quiz, User } from "@prisma/client";
 
 type GenericQuizResult = Promise<Result<Quiz>>;
 
