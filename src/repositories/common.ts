@@ -6,6 +6,6 @@ export const findUser = async (data: { username?: string, email: string }): Prom
         const byUsername = await prisma.user.findFirst({where: { username: data.username, deletedAt: null }})
         if (byUsername) return byUsername;
     }
-    const byEmail = await prisma.user.findFirst({where: { username: data.email, deletedAt: null }})
+    const byEmail = await prisma.user.findFirst({where: { email: data.email, deletedAt: null }})
     return byEmail;
 }
