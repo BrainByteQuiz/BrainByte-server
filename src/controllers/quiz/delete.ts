@@ -1,22 +1,20 @@
-import create from "../../repositories/quiz/create";
+import deleteQuiz from "../../repositories/quiz/delete";
 import type { Request, Response } from "express";
 import { errorResponse } from "../common";
-import { z } from "zod";
+import z from "zod";
 
-const quizSchema = z.object({
-    name: z.string().min(2).max(128),
-    description: z.string().min(0).max(1024).optional(),
+const deleteSchema = z.object({
+    id: z.string().uuid(),
     creatorId: z.string().uuid(),
-    questions: z.string().optional(),
 });
 
-const createQuizControl = async (req: Request, res: Response) => {
-    const validated = await quizSchema.safeParseAsync(req.params);
+const deleteQuizControl = async (req: Request, res: Response) => {
+    const validated = await deleteSchema.safeParseAsync(req.params);
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
     }
 
-    const result = await create(validated.data);
+    const result = await deleteQuiz(validated.data);
     if (result.isErr) {
         return res.status(404).send(errorResponse(result.error.message));
     }
@@ -28,4 +26,4 @@ const createQuizControl = async (req: Request, res: Response) => {
     });
 };
 
-export default createQuizControl;
+export default deleteQuizControl;
