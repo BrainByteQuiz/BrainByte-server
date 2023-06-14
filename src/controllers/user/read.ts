@@ -1,19 +1,17 @@
 import type { Request, Response } from 'express';
+import deleteUser from '../../repositories/user/delete';
 import type { ApiResponse } from '../types';
-import register from '../../repositories/user/register';
 import { z } from 'zod';
+import { read } from '../../repositories/user/read';
 
-
-const userSchema = z.object({
-  username: z.string().min(4).max(20),
-  email: z.string().email(),
-  password: z.string().min(8),
+const readSchema = z.object({
+  id: z.string().uuid(),
 });
 
-const registerUserController = async (req: Request, res: Response) => {
+const readUserController = async (req: Request, res: Response) => {
   let validatedData;
   try {
-    validatedData = userSchema.parse(req.body);
+    validatedData = readSchema.parse(req.params);
   }
   catch (error) {
     const response: ApiResponse<{}> = {
@@ -24,9 +22,9 @@ const registerUserController = async (req: Request, res: Response) => {
     return res.status(400).send(response);
   }
   try {
-    const userResult = await register(validatedData);
+    const userResult = await read(validatedData);
     if (userResult.isOk) {
-      return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: 'Registering successful'});
+      return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: 'Delete successful' });
     }
     console.log(userResult.error);
     throw userResult.error;
@@ -38,6 +36,7 @@ const registerUserController = async (req: Request, res: Response) => {
     };
     return res.status(500).send(response);
   }
-};
+}
 
-export default registerUserController;
+
+export default readUserController;

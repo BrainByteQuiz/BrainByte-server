@@ -1,15 +1,20 @@
 import type { Request, Response } from 'express';
 import type { ApiResponse } from '../types';
 import login from '../../repositories/user/login';
+import { z } from 'zod';
 
-const loginUser = async (req: Request, res: Response) => {
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+const loginUserController = async (req: Request, res: Response) => {
     try {
-      if (!req.params['email'] || !req.params['password'] ) {
-        throw new Error();
-      }
-      const userResult = await login({ email: req.params['email'], password: req.params['password'] });
+      const validatedData = loginSchema.parse(req.body);
+      const userResult = await login(validatedData);
       if (userResult.isOk) {
-        return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: '' });
+        return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: 'Login successful' });
       }
       console.log(userResult.error);
       throw userResult.error;
@@ -19,8 +24,8 @@ const loginUser = async (req: Request, res: Response) => {
         data: {},
         error: (error as Error).message,
       };
-      return res.status(404).send(response);
+      return res.status(400).send(response);
     }
 };
 
-export default login;
+export default loginUserController;

@@ -1,15 +1,29 @@
 import type { Request, Response } from 'express';
 import deleteUser from '../../repositories/user/delete';
 import type { ApiResponse } from '../types';
+import { z } from 'zod';
 
-const deleteUserC = async (req: Request, res: Response) => {
+const deleteSchema = z.object({
+  id: z.string().uuid(),
+});
+
+const deleteUserController = async (req: Request, res: Response) => {
+  let validatedData;
   try {
-    if (!req.params['id']) {
-      throw new Error();
-    }
-    const userResult = await deleteUser({ id: req.params['id'] });
+    validatedData = deleteSchema.parse(req.params);
+  }
+  catch (error) {
+    const response: ApiResponse<{}> = {
+      status: 'failure',
+      data: {},
+      error: (error as Error).message,
+    };
+    return res.status(400).send(response);
+  }
+  try {
+    const userResult = await deleteUser(validatedData);
     if (userResult.isOk) {
-      return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: '' });
+      return res.status(200).send({ status: 'success', data: userResult.unwrap(), message: 'Delete successful' });
     }
     console.log(userResult.error);
     throw userResult.error;
@@ -19,9 +33,9 @@ const deleteUserC = async (req: Request, res: Response) => {
       data: {},
       error: (error as Error).message,
     };
-    return res.status(404).send(response);
+    return res.status(500).send(response);
   }
 }
 
 
-export default deleteUserC;
+export default deleteUserController;
