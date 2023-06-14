@@ -8,7 +8,7 @@ const deleteSchema = z.object({
     creatorId: z.string().uuid(),
 });
 
-const deleteQuizControl = async (req: Request, res: Response) => {
+const deleteQuizController = async (req: Request, res: Response) => {
     const validated = await deleteSchema.safeParseAsync(req.params);
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
@@ -26,4 +26,4 @@ const deleteQuizControl = async (req: Request, res: Response) => {
     });
 };
 
-export default deleteQuizControl;
+export default deleteQuizController;

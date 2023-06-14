@@ -11,7 +11,7 @@ const updateSchema = z.object({
     questions: z.string().optional(),
 });
 
-const updateQuizControl = async (req: Request, res: Response) => {
+const updateQuizController = async (req: Request, res: Response) => {
     const validated = await updateSchema.safeParseAsync(req.params);
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
@@ -37,4 +37,4 @@ const updateQuizControl = async (req: Request, res: Response) => {
     });
 };
 
-export default updateQuizControl;
+export default updateQuizController;

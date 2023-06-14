@@ -10,7 +10,7 @@ const quizSchema = z.object({
     questions: z.string().optional(),
 });
 
-const createQuizControl = async (req: Request, res: Response) => {
+const createQuizController = async (req: Request, res: Response) => {
     const validated = await quizSchema.safeParseAsync(req.params);
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
@@ -28,4 +28,4 @@ const createQuizControl = async (req: Request, res: Response) => {
     });
 };
 
-export default createQuizControl;
+export default createQuizController;

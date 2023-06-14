@@ -12,7 +12,7 @@ const readAllSchema = z.object({
     creatorId: z.string().uuid(),
 });
 
-const readQuizControl = async (req: Request, res: Response) => {
+const readQuizController = async (req: Request, res: Response) => {
     let result;
     if (!req.params["id"] && req.params["creatorId"]) {
         const validated = await readAllSchema.safeParseAsync(req.params);
@@ -43,4 +43,4 @@ const readQuizControl = async (req: Request, res: Response) => {
     });
 };
 
-export default readQuizControl;
+export default readQuizController;
