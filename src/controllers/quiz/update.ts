@@ -12,7 +12,7 @@ const updateSchema = z.object({
 });
 
 const updateQuizController = async (req: Request, res: Response) => {
-    const validated = await updateSchema.safeParseAsync(req.params);
+    const validated = await updateSchema.safeParseAsync(req.body);
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
     }
