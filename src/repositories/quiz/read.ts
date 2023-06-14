@@ -3,7 +3,7 @@ import { QuizReadData, QuizReadUserData } from "./types/data";
 import { QuizReadResult, QuizReadUserResult } from "./types/result";
 import client from "../client";
 
-const specific = async (data: QuizReadData): QuizReadResult => {
+export const specific = async (data: QuizReadData): QuizReadResult => {
   try {
     return Result.ok(
       await client.$transaction(async (tx) => {
@@ -25,7 +25,7 @@ const specific = async (data: QuizReadData): QuizReadResult => {
   }
 };
 
-const allOfUser = async (data: QuizReadUserData): QuizReadUserResult => {
+export const allOfUser = async (data: QuizReadUserData): QuizReadUserResult => {
   try {
     return Result.ok(
       await client.user.findUniqueOrThrow({
@@ -42,4 +42,3 @@ const allOfUser = async (data: QuizReadUserData): QuizReadUserResult => {
   }
 };
 
-export default specific; allOfUser;
