@@ -3,6 +3,7 @@ export type QuizCreateData = {
     description?: string | undefined;
     creatorId: string;
     questions?: string | undefined;
+    image?: string | undefined;
 };
 
 export type QuizDeleteData = {
@@ -26,5 +27,5 @@ export type QuizUpdateData = {
         name?: string | undefined;
         description?: string | undefined;
         questions?: string | undefined;
-    }
+    };
 };

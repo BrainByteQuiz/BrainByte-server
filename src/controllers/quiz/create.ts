@@ -8,10 +8,13 @@ const quizSchema = z.object({
     description: z.string().min(0).max(1024).optional(),
     creatorId: z.string().uuid(),
     questions: z.string().optional(),
+    image: z.string().optional(),
 });
 
 const createQuizController = async (req: Request, res: Response) => {
-    const validated = await quizSchema.safeParseAsync(req.body);
+    const image =
+        "https://api.dicebear.com/6.x/fun-emoji/svg?seed=" + req.body.name;
+    const validated = await quizSchema.safeParseAsync({ ...req.body, image });
     if (!validated.success) {
         return res.status(400).send(errorResponse(validated.error.message));
     }

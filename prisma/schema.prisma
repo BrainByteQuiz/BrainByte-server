@@ -16,6 +16,7 @@ model Quiz {
   creatorId   String
   questions   String?
   deletedAt   DateTime?
+  image       String?         
 }
 
 model User {
