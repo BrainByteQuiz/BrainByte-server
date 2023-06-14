@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { findUser } from "../common";
 import { User } from "@prisma/client";
 
-const PICTURE_API_URL = "https://api.dicebear.com/6.x/notionists/svg?seed=";
+const PICTURE_API_URL = "https://api.dicebear.com/6.x/big-ears/svg?seed=";
 
 const register = async (data: {
     email: string;
