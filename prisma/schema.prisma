@@ -1,0 +1,37 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Quiz {
+  id          String         @id @default(uuid())
+  name        String
+  description String?
+  creator     User           @relation(fields: [creatorId], references: [id])
+  creatorId   String
+  questions   String?
+  deletedAt   DateTime?
+  image       String?         
+}
+
+model User {
+  id              String         @id @default(uuid())
+  username        String
+  email           String
+  picturePath     String?
+  hashedPassword  String
+  salt            String
+  deletedAt       DateTime?
+  createdQuizzes  Quiz[]
+}
+
+model Image {
+  id          String        @id @default(uuid())
+  URI         String        
+  deletedAt   DateTime?
+}
